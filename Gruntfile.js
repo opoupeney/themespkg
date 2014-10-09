@@ -104,7 +104,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['uglify', 'less', 'cssmin']);
+    grunt.registerTask('default', ['uglify', 'less', 'cssmin', 'copy']);
     grunt.registerTask('dist-less', ['less','cssmin']);
     grunt.registerTask('dist-js', ['uglify']);
     grunt.registerTask('dist-resources', ['copy']);
