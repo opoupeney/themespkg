@@ -1,4 +1,8 @@
 /*!
+ * Standard v1.0.0
+ * Copyright 2014 Interactive Clouds
+ */
+/*!
  * SmartAdmin - Responsive WebApp
  *
  * Copyright 2014 bootstraphunter.com
@@ -1542,6 +1546,7 @@ div.dataTables_info {
   font-weight: bold;
   font-style: italic;
   color: #969696;
+  float: left;
 }
 /*
  * Double lines in thead tfoot
@@ -1561,7 +1566,7 @@ table.dataTable thead > tr > th.sorting_disabled {
  * DT FIlter
  */
 .dataTables_filter {
-  float: left;
+  float: right;
 }
 .dataTables_filter .input-group-addon {
   width: 32px;
@@ -1573,14 +1578,6 @@ table.dataTable thead > tr > th.sorting_disabled {
 .dataTables_filter .input-group-addon + .form-control {
   float: left;
 }
-
-/*
- * DT Length
- */
-.dataTables_length {
-  float: right;
-}
-
 /*
  * LTR filter position
  */
