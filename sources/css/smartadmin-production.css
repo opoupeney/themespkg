@@ -1510,10 +1510,6 @@ table.dataTable thead .sorting_asc_disabled {
 table.dataTable thead .sorting_desc_disabled {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATAQMAAABInqSPAAAABlBMVEUAAABUVFR8AzIeAAAAAnRSTlMAf7YpoZUAAAAcSURBVAjXYyAE2P8wMDD/YGBg/ADkPABiB5xKAZDZBBBG27rUAAAAAElFTkSuQmCC) no-repeat center right;
 }
-table.dataTable thead .sorting_asc,
-table.dataTable thead .sorting_desc {
-  background-color: #eeeeee;
-}
 .dataTables_empty {
   padding: 20px 10px !important;
   font-size: 14px;

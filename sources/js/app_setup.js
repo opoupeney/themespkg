@@ -17,6 +17,10 @@ angular.element(document).ready(function() {
 
     // Top menu on/off
     var $topmenu = false;
+    if ($('body').hasClass("menu-on-top") || localStorage.getItem('sm-setmenu')=='top' ) {
+        $topmenu = true;
+        $('body').addClass("menu-on-top");
+    }
 
     /*
      * LOAD MAIN MENU
@@ -45,8 +49,9 @@ angular.element(document).ready(function() {
     var addMenuItem = function(menuitem, parent) {
         var id = Math.floor(Math.random() * 100000);
         var item_fragment = '<li id="'+id+'">';
+
         if (menuitem.children.length>0) {
-            item_fragment += '<a href="'+menuitem.action+'">'
+            item_fragment += '<a href="#">'
                 + '<i class="' + menuitem.icon_class + '"></i>'
                 + ' <span class="menu-item-parent">' + menuitem.label + '</span></a>'
                 + '<ul id="'+id+'_submenu"></ul></li>';
@@ -57,7 +62,7 @@ angular.element(document).ready(function() {
         } else {
             item_fragment += '<a href="'+menuitem.action+'" title="'+menuitem.label+'">'
                 + '<i class="' + menuitem.icon_class + '"></i>'
-                + ' <span>' + menuitem.label + '</span></a></li>';
+                + ' <span'+((parent=='main_menu') ? ' class="menu-item-parent"' : '')+'>' + menuitem.label + '</span></a></li>';
             $('#'+parent).append( item_fragment );
         }
 
