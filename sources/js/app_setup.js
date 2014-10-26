@@ -3,7 +3,7 @@
  * Description: Fire when DOM is ready
  */
 
-$.navAsAjax = false;
+$.navAsAjax = true;
 $.enableJarvisWidgets = true;
 
 angular.element(document).ready(function() {
@@ -15,8 +15,46 @@ angular.element(document).ready(function() {
     $.root_ = $('body');
     $.left_panel = $('#left-panel');
 
+    $.shortcut_dropdown = $('#shortcut');
+    $.bread_crumb = $('#ribbon ol.breadcrumb');
+
+    // interval array (to be used with jarviswidget in ajax and angular mode) to clear auto fetch interval
+    $.intervalArr = new Array();
+
     // Top menu on/off
     var $topmenu = false;
+
+    // desktop or mobile
+    $.device = null;
+
+    /*
+     * DETECT MOBILE DEVICES
+     * Description: Detects mobile device - if any of the listed device is detected
+     * a class is inserted to $.root_ and the variable $.device is decleard.
+     */
+
+    /* so far this is covering most hand held devices */
+    var ismobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+
+    if (!ismobile) {
+        // Desktop
+        $.root_.addClass("desktop-detected");
+        $.device = "desktop";
+    } else {
+        // Mobile
+        $.root_.addClass("mobile-detected");
+        $.device = "mobile";
+
+        if ($.fastClick) {
+            // Removes the tap delay in idevices
+            // dependency: js/plugin/fastclick/fastclick.js
+            $.root_.addClass("needsclick");
+            FastClick.attach(document.body);
+        }
+
+    }
+
+    // Check for menu position
     if ($('body').hasClass("menu-on-top") || localStorage.getItem('sm-setmenu')=='top' ) {
         $topmenu = true;
         $('body').addClass("menu-on-top");
@@ -43,15 +81,20 @@ angular.element(document).ready(function() {
                     alert("Error - menu anchor does not exist");
                 }
             }
+
+            //var current_page_name = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            //$('li[data-menu-ref="'+current_page_name+'"]').addClass('active');
+            $('nav a[href="Home.html"]').click();
+
         });
     }
 
     var addMenuItem = function(menuitem, parent) {
         var id = Math.floor(Math.random() * 100000);
-        var item_fragment = '<li id="'+id+'">';
+        var item_fragment = '<li id="'+id+'"';
 
         if (menuitem.children.length>0) {
-            item_fragment += '<a href="#">'
+            item_fragment += '><a href="#">'
                 + '<i class="' + menuitem.icon_class + '"></i>'
                 + ' <span class="menu-item-parent">' + menuitem.label + '</span></a>'
                 + '<ul id="'+id+'_submenu"></ul></li>';
@@ -60,7 +103,7 @@ angular.element(document).ready(function() {
                 addMenuItem(menuitem.children[i], id+'_submenu');
             }
         } else {
-            item_fragment += '<a href="'+menuitem.action+'" title="'+menuitem.label+'">'
+            item_fragment += ' data-menu-ref="'+menuitem.action+'"><a href="'+menuitem.action+'" title="'+menuitem.label+'">'
                 + '<i class="' + menuitem.icon_class + '"></i>'
                 + ' <span'+((parent=='main_menu') ? ' class="menu-item-parent"' : '')+'>' + menuitem.label + '</span></a></li>';
             $('#'+parent).append( item_fragment );
@@ -151,7 +194,7 @@ angular.element(document).ready(function() {
                 $.root_.toggleClass("minified");
                 $.root_.removeClass("hidden-menu");
                 $('html').removeClass("hidden-menu-mobile-lock");
-                $this.effect("highlight", {}, 500);
+                //$this.effect("highlight", {}, 500);
             }
         },
 
@@ -339,11 +382,13 @@ angular.element(document).ready(function() {
                 .prop('checked')) {
                 //window.location.href = '?menu=top';
                 localStorage.setItem('sm-setmenu', 'top');
-                location.reload();
+                //location.reload();
+                window.location.href = 'index.html';
             } else {
                 //window.location.href = '?';
                 localStorage.setItem('sm-setmenu', 'left');
-                location.reload();
+                //location.reload();
+                window.location.href = 'index.html';
             }
         });
 
@@ -586,3 +631,154 @@ $.fn.extend({
 
 
 /* ~ END: CUSTOM MENU PLUGIN */
+
+/*
+ * APP AJAX REQUEST SETUP
+ * Description: Executes and fetches all ajax requests also
+ * updates naivgation elements to active
+ */
+if($.navAsAjax)
+{
+    // fire this on page load if nav exists
+    if ($('nav').length) {
+        checkURL();
+    }
+
+    $(document).on('click', 'nav a[href!="#"]', function(e) {
+        e.preventDefault();
+        var $this = $(e.currentTarget);
+
+        // if parent is not active then get hash, or else page is assumed to be loaded
+        if (!$this.parent().hasClass("active") && !$this.attr('target')) {
+
+            // update window with hash
+            // you could also do here:  $.device === "mobile" - and save a little more memory
+
+            if ($.root_.hasClass('mobile-view-activated')) {
+                $.root_.removeClass('hidden-menu');
+                window.setTimeout(function() {
+                    if (window.location.search) {
+                        window.location.href =
+                            window.location.href.replace(window.location.search, '')
+                                .replace(window.location.hash, '') + '#' + $this.attr('href');
+                    } else {
+                        window.location.hash = $this.attr('href');
+                    }
+                }, 150);
+                // it may not need this delay...
+            } else {
+                if (window.location.search) {
+                    window.location.href =
+                        window.location.href.replace(window.location.search, '')
+                            .replace(window.location.hash, '') + '#' + $this.attr('href');
+                } else {
+                    window.location.hash = $this.attr('href');
+                }
+            }
+        }
+
+    });
+
+    // fire links with targets on different window
+    $(document).on('click', 'nav a[target="_blank"]', function(e) {
+        e.preventDefault();
+        var $this = $(e.currentTarget);
+
+        window.open($this.attr('href'));
+    });
+
+    // fire links with targets on same window
+    $(document).on('click', 'nav a[target="_top"]', function(e) {
+        e.preventDefault();
+        var $this = $(e.currentTarget);
+
+        window.location = ($this.attr('href'));
+    });
+
+    // all links with hash tags are ignored
+    $(document).on('click', 'nav a[href="#"]', function(e) {
+        e.preventDefault();
+    });
+
+    // DO on hash change
+    $(window).on('hashchange', function() {
+        checkURL();
+    });
+}
+
+// CHECK TO SEE IF URL EXISTS
+function checkURL() {
+
+    // bootstrap backdrop bug for ajax version
+    if ($('.modal-backdrop')[0] && $.navAsAjax){
+        $('.modal-backdrop').remove();
+        //console.log("backdrop removed");
+    }
+
+    //get the url by removing the hash
+    var url = location.hash.replace(/^#/, '');
+
+    //BEGIN: IE11 Work Around
+    if (!url) {
+
+        try {
+            var documentUrl = window.document.URL;
+            if (documentUrl) {
+                if (documentUrl.indexOf('#', 0) > 0 && documentUrl.indexOf('#', 0) < (documentUrl.length + 1)) {
+                    url = documentUrl.substring(documentUrl.indexOf('#', 0) + 1);
+
+                }
+
+            }
+
+        } catch (err) {}
+    }
+    //END: IE11 Work Around
+
+    container = $('#content');
+    // Do this if url exists (for page refresh, etc...)
+    if (url) {
+        // remove all active class
+        $('nav li.active').removeClass("active");
+        // match the url and add the active class
+        $('nav li:has(a[href="' + url + '"])').addClass("active");
+        var title = ($('nav a[href="' + url + '"]').attr('title'));
+
+        // change page title from global var
+        document.title = (title || document.title);
+        //console.log("page title: " + document.title);
+
+        // parse url to jquery
+        loadURL(url + location.search, container);
+    } else {
+
+        // grab the first URL from nav
+        var $this = $('nav > ul > li:first-child > a[href!="#"]');
+
+        //update hash
+        window.location.hash = $this.attr('href');
+
+    }
+
+}
+
+// LOAD AJAX PAGES
+function loadURL(url, container) {
+    $( '#dfxScreenUrl' ).val(url);
+    $( '#dfxScreenUrl' ).trigger('change');
+}
+
+// UPDATE BREADCRUMB
+function drawBreadCrumb() {
+    var nav_elems = $('nav li.active > a'), count = nav_elems.length;
+
+    //console.log("breadcrumb")
+    $.bread_crumb.empty();
+    $.bread_crumb.append($("<li>Home</li>"));
+    nav_elems.each(function() {
+        $.bread_crumb.append($("<li></li>").html($.trim($(this).clone().children(".badge").remove().end().text())));
+        // update title when breadcrumb is finished...
+        if (!--count) document.title = $.bread_crumb.find("li:last-child").text();
+    });
+
+}

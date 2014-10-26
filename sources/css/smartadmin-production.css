@@ -3148,14 +3148,14 @@ table.fc-border-separate {
 /*
 
 	 Copyright 2013 - SmartAdmin : WebApp (Sunny)
-	
+
 	 * This is part of an item on wrapbootstrap.com
 	 * https://wrapbootstrap.com/user/myorange
 	 * ==================================
-	
+
 	 Table of Contents
 	 ---------------------------------------------------------------
-	
+
 	 - Main
 	 - Header
 	 - Content
@@ -3170,7 +3170,7 @@ table.fc-border-separate {
 	 - Clearfix
 	 - Examples (minimalistic in grid)
 	 - Examples (lists)
-	
+
 	 */
 /*
 	 * MAIN
@@ -3274,6 +3274,9 @@ article.sortable-grid {
 .jarviswidget-ctrls .button-icon:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+.jarviswidget-ctrls .button-icon i {
+  margin-top: 8px;
+}
 .jarviswidget-loader {
   width: 32px;
   height: 32px;
@@ -3285,6 +3288,9 @@ article.sortable-grid {
   text-align: center;
   line-height: 32px;
   font-size: 111%;
+}
+.jarviswidget-loader i {
+  margin-top: 8px;
 }
 /*
 	 * CONTENT
@@ -3827,7 +3833,7 @@ body.nooverflow {
 }
 /* greenLight theme */
 .jarviswidget-color-greenLight > header {
-  background: #71843F;
+  background: #75DD6E;
   color: #FFF;
 }
 .jarviswidget-color-greenLight > header > .jarviswidget-ctrls a,
@@ -3838,11 +3844,11 @@ body.nooverflow {
   color: #333 !important;
 }
 .jarviswidget-color-greenLight > header {
-  border-color: #638167 !important;
+  border-color: #61B85C !important;
 }
-/* 
+/*
 	 * WIDGET COLOR DROPDOWN
-	 * 
+	 *
 	 */
 .color-select {
   list-style: none;
@@ -19451,11 +19457,15 @@ img.away {
   margin-top: 5px;
   font-size: 19px;
   transition: all 0.1s linear 0s;
+  z-index: 2;
 }
 .minifyme:hover {
   background: #646464;
   color: #E4E4E4;
   right: 0px;
+}
+.minifyme i {
+  margin-top: 4px;
 }
 .minified .minifyme {
   right: 0px;
@@ -19724,12 +19734,12 @@ img.away {
   border-color: #6e587a;
 }
 .panel-greenLight {
-  border-color: #71843f;
+  border-color: #75dd6e;
 }
 .panel-greenLight > .panel-heading {
   color: #ffffff;
-  background-color: #71843f;
-  border-color: #71843f;
+  background-color: #75dd6e;
+  border-color: #75dd6e;
 }
 .panel-greenDark {
   border-color: #496949;
@@ -22052,7 +22062,7 @@ label:hover input[type="checkbox"][disabled].checkbox:checked + span:before {
   color: #356e35 !important;
 }
 .txt-color-greenLight {
-  color: #71843f !important;
+  color: #75dd6e !important;
 }
 .txt-color-greenDark {
   color: #496949 !important;
@@ -22115,7 +22125,7 @@ label:hover input[type="checkbox"][disabled].checkbox:checked + span:before {
   background-color: #356e35 !important;
 }
 .bg-color-greenLight {
-  background-color: #71843f !important;
+  background-color: #75dd6e !important;
 }
 .bg-color-greenDark {
   background-color: #496949 !important;
