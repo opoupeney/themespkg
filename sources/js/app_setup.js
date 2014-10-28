@@ -773,12 +773,13 @@ function drawBreadCrumb() {
     var nav_elems = $('nav li.active > a'), count = nav_elems.length;
 
     //console.log("breadcrumb")
-    $.bread_crumb.empty();
-    $.bread_crumb.append($("<li>Home</li>"));
-    nav_elems.each(function() {
-        $.bread_crumb.append($("<li></li>").html($.trim($(this).clone().children(".badge").remove().end().text())));
-        // update title when breadcrumb is finished...
-        if (!--count) document.title = $.bread_crumb.find("li:last-child").text();
-    });
-
+    if ($.bread_crumb!=null) {
+        $.bread_crumb.empty();
+        $.bread_crumb.append($("<li>Home</li>"));
+        nav_elems.each(function () {
+            $.bread_crumb.append($("<li></li>").html($.trim($(this).clone().children(".badge").remove().end().text())));
+            // update title when breadcrumb is finished...
+            if (!--count) document.title = $.bread_crumb.find("li:last-child").text();
+        });
+    }
 }
