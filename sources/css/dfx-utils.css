@@ -1120,12 +1120,12 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
     border-top-left-radius: 3px;
 }
 
-/* DFX class to manage control-goup in switch elements */
+/* DFX class to manage control-group in switch elements */
 
-.dfx-toggle.control-group{
+.dfx-form-group.control-group{
     margin-bottom:5px;
 }
-.dfx-toggle.control-group-inline{
+.dfx-form-group.control-group-inline{
     display:inline-block;
     margin-right:10px;
 }
