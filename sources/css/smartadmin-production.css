@@ -798,6 +798,7 @@ table.dataTable thead .sorting_desc_disabled {
 table.dataTable thead > tr > th {
   padding-left: 18px;
   padding-right: 18px;
+  font-weight: normal;
 }
 table.dataTable th:active {
   outline: none;
@@ -831,7 +832,7 @@ div.dataTables_scrollFoot table {
    to use separate
  */
 table.table-bordered.dataTable {
-  border-collapse: separate !important;
+  /*border-collapse: separate !important;*/
 }
 table.table-bordered thead th,
 table.table-bordered thead td {
@@ -1524,6 +1525,9 @@ table.dataTable thead .sorting_desc_disabled {
 .table > thead > tr > th {
   padding: 8px 10px;
 }
+table.dataTable {
+  font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+}
 table.dataTable thead > tr > th,
 table.dataTable tfoot > tr > th {
   padding-left: 9px !important;
@@ -1539,8 +1543,6 @@ table.dataTable thead > tr > th.hasinput {
 div.dataTables_info {
   padding-top: 9px;
   font-size: 13px;
-  font-weight: bold;
-  font-style: italic;
   color: #969696;
   float: left;
 }
