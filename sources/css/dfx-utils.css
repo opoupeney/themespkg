@@ -551,23 +551,23 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
  * Rating sizes
  */
 .rating-xl {
-    font-size: 4.89em;
-}
-
-.rating-lg {
-    font-size: 3.91em;
-}
-
-.rating-md {
-    font-size: 3.13em;
-}
-
-.rating-sm {
     font-size: 2.5em;
 }
 
+.rating-lg {
+    font-size: 2.2em;
+}
+
+.rating-md {
+    font-size: 1.8em;
+}
+
+.rating-sm {
+    font-size: 1.3em;
+}
+
 .rating-xs {
-    font-size: 2em;
+    font-size: 1em;
 }
 
 /**
@@ -1133,9 +1133,9 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block !important;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 20px;
+    padding: 10px 8px;
+    font-size: 12px;
+    line-height: 1em;
 }
 .bootstrap-switch .bootstrap-switch-handle-on,
 .bootstrap-switch .bootstrap-switch-handle-off {
@@ -1204,23 +1204,23 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
 .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-on,
 .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-off,
 .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-label {
-    padding: 1px 5px;
-    font-size: 12px;
-    line-height: 1.5;
+    padding: 3px 5px;
+    font-size: 11px;
+    line-height: 1em;
 }
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-on,
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-off,
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-label {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
+    padding: 5px 8px;
+    font-size: 11px;
+    line-height: 1em;
 }
 .bootstrap-switch.bootstrap-switch-large .bootstrap-switch-handle-on,
 .bootstrap-switch.bootstrap-switch-large .bootstrap-switch-handle-off,
 .bootstrap-switch.bootstrap-switch-large .bootstrap-switch-label {
-    padding: 6px 16px;
-    font-size: 18px;
-    line-height: 1.33;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.2em;
 }
 .bootstrap-switch.bootstrap-switch-disabled,
 .bootstrap-switch.bootstrap-switch-readonly,
@@ -1275,7 +1275,7 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
 .dfx-form-group.control-group{
     margin-bottom:5px;
 }
-.dfx-form-group..control-group-inline{
+.dfx-form-group.control-group-inline{
     display:inline-block;
     margin-right:10px;
 }

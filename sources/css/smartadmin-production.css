@@ -3313,7 +3313,7 @@ article.sortable-grid {
   border-right-color: #CCC !important;
   border-bottom-color: #CCC !important;
   border-left-color: #CCC !important;
-  padding: 13px 13px 0px;
+  padding: 0px;
   /* as per version 1.3 */
   overflow: visible;
 }
